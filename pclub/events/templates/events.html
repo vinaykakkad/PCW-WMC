@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>PCW-Events</title>
+    <link rel="stylesheet" href="{% static 'events/css/events.css'%}">
+{% endblock %}
+
+{% block content%}
+<section id="events">
+    <div class="container-fluid pt-5">
+        <p class="center-mx heading"> 
+            Events<br>
+            <div class="container underline"></div>
+        </p>
+    </div>
+    
+    <button type="button" class="btn btn-md center-mx modal-button" data-toggle="modal" data-target="#resource_modal">Filter</button>    
+    
+    {% for event in events %}
+        <div class="row py-5">
+            <div class="col-md d-flex align-items-center mp-0">
+                <div class="carousel-box">
+                    {% include 'events_carousel.html' %}
+                </div>
+            </div>
+            <div class="col-md d-flex align-items-center mp-0">
+                <div class="description-box d-flex align-items-center">
+                    <div>
+                        <span class="">
+                            <b>{{event.title}}</b>
+                        </span><br><br>
+                        <span class="">
+                            {{event.description}}
+                        </span><br><br>
+                        <span class="">
+                            Date: {{event.date}}
+                        </span><br><br>
+                    </div>
+                </div>        
+            </div>
+        </div>
+    {% endfor %}    
+</section>
+{% endblock %} 

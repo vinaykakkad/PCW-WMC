@@ -1,0 +1,26 @@
+<div class="modal fade" id="resource_modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mr-auto">Filter</h4>
+                <button type="button" class="close ml-auto" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'resources' %} " method="POST" class="form-group">
+                  {% csrf_token %}
+                    <label for="tags">Filter:</label>
+                    <select name="tags" class="custom-select form-control" multiple required>
+                      {% for tag in tags %}
+                        <option value="{{tag}}">{{tag}}</option>
+                      {% endfor %}
+                    </select>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-primary mr-auto">Filter</button>
+                <button type="button" class="btn btn-default ml-auto" data-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

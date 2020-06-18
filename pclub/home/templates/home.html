@@ -1,0 +1,53 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+
+<title>PCW-Home</title>
+<link rel="stylesheet" href="{% static 'home/css/home.css'%}"> {% endblock %} {% block content %}
+
+<section id="banner">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="wave">
+        <path fill="white" fill-opacity="1" d="M0,64L80,53.3C160,43,320,21,480,26.7C640,32,800,64,960,64C1120,64,1280,32,1360,16L1440,0L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
+    </svg>
+
+    <div class="row banner-row">
+        <div class="col-lg banner-col-1">
+            <img src="{% static 'images/banner_image.svg'%}" alt="" class="banner-img">
+        </div>
+        <div class="col-lg banner-col-2 pb-5">
+            <div class="container-fluid intro-div">
+                <span class="intro-head">
+                    Programming Club
+                </span><br><br>
+                <span class="intro-body">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque numquam repellendus ea dolorem, quasi est, molestias, animi necessitatibus nesciunt optio autem porro blanditiis ad similique quam voluptatum officiis obcaecati ipsum.
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi cupiditate amet, eveniet quam nostrum vitae? Fuga repudiandae quia deserunt accusantium id, sed dolorem minima. Cumque voluptatem doloribus odit repellat quam.
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'footer.html'%}
+    <div class="modal fade" id="anmntsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="anmntsModalLabel">Announcements</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        {% for anmnts in announcements %}
+                            <li>{{anmnts}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="anmnts-box sticky d-flex align-items-center" data-toggle="modal" data-target="#anmntsModal">
+        <img src="{% static 'images/speaker1.png' %}" class="anmnts-img" alt="">
+        <span class="ml-auto mr-1">Announcements</span>    
+    </div>
+{% endblock %}
+

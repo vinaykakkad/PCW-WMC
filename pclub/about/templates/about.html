@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<title>PCW-About</title>
+<link rel="stylesheet" href="{% static 'about/css/about.css' %}"> {% endblock %} {% block content %}
+<section class="about">
+    <div class="container-fluid mt-5">
+        <p class="center-mx heading">
+            Committee<br>
+            <div class="container underline"></div>
+        </p>
+    </div>
+    <div class="row">
+    {% for member in committee %}
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex my-5 justify-content-center">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front" style="background-color: transparent">
+                        <img src="{{member.image.url}}" class="img-circle" alt="Profile" style="width:300px;height:300px;">
+                    </div>
+                    <div class="flip-card-back">
+                        <h1>{{member.name}}</h1>
+                        <p>{{member.designation}}</p>
+                        <p>{{member.email}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</section>
+{% endblock %}

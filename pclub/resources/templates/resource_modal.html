@@ -1,0 +1,21 @@
+{% extends 'modal.html' %}
+
+{% block modal_id %}
+    resource_modal
+{% endblock %}
+
+{% block modal_title %}
+    Filter
+{% endblock %}
+
+{% block modal_body %}
+    <form action="{% url 'resources' %} " method="POST" class="form-inline">
+        <label for="tags">Filter:</label>
+        <select name="tags" class="custom-select" multiple required>
+            {% for tag in tags %}
+                <option value="{{tag}}">{{tag}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-sm btn-primary">Filter</button>
+    </form>
+{% endblock %}

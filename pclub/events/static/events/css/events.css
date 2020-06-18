@@ -1,0 +1,92 @@
+#events {
+    background: linear-gradient(30deg, #2E39DC, #ff0054);
+    background-size: cover;
+    position: relative;
+}
+
+.heading {
+    text-align: center;
+    color: white;
+    font-size: 60px;
+}
+
+.underline {
+    border: 2px solid white;
+    width: 200px;
+}
+
+@media screen and (max-width: 600px) {
+    .heading {
+        font-size: 35px;
+    }
+    .underline {
+        border: 2px solid white;
+        width: 100px;
+    }
+}
+
+.modal-button {
+    border: 2px solid white;
+    background-color: white;
+    color: #ff0054;
+}
+
+.modal-button:hover {
+    background-color: transparent;
+    color: white;
+    transition-duration: 1s;
+}
+
+.carousel-box
+{
+    min-width: 90vw;
+    max-width: 90vw;
+    min-height: 75vw;
+    max-height: 75vw;
+    margin: auto;
+}
+
+.carousel-image
+{
+    min-width: 90vw;
+    max-width: 90vw;
+    min-height: 75vw;
+    max-height: 75vw;
+}
+
+.description-box
+{
+    min-width: 90vw;
+    max-width: 90vw;
+    /* min-height: 75vw; */
+    background-color: #403d39;
+    color: white;
+    padding: 10px;
+    margin: auto;
+}
+
+@media screen and (min-width: 768px)
+{
+    .carousel-box
+    {
+        min-width: 40vw;
+        max-width: 40vw;
+        min-height: 35vw;
+        max-height: 35vw;
+        margin-right: 0px;
+    }
+    .carousel-image
+    {
+        min-width: 40vw;
+        max-width: 40vw;
+        min-height: 35vw;
+        max-height: 35vw;
+    }
+    .description-box
+    {
+        min-width: 40vw;
+        max-width: 40vw;
+        min-height: 35vw;
+        margin-left: 0px;
+    }
+}

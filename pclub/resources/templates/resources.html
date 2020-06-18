@@ -1,0 +1,44 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block head %}
+    <title>PCW-Resources</title>
+    <link rel="stylesheet" href="{% static 'resources/css/resources.css' %}">
+{% endblock %}
+
+{% block content %}
+<section id="resources">
+    <div class="container-fluid mt-5">
+        <p class="center-mx heading"> 
+            Resources<br>
+            <div class="container underline"></div>
+        </p>
+    </div>
+    
+    <button type="button" class="btn btn-md center-mx modal-button" data-toggle="modal" data-target="#resource_modal">Filter</button>    
+    {% include 'modal.html'%}
+    
+    {% for resource in resources %}
+        <div class="container resource-box my-5 center-mx">
+            <table class="resource-row">
+                <tr>
+                    <td class="resource-col-1">
+                        <span class="col-title"><h5><b>{{resource.title}}</b></h5></span>
+                        <!-- <br> -->
+                        <div class="col-description">{{resource.description}}</div>
+                        
+                    </td>
+                    <td class="resource-col-2">
+                        {% if resource.resource_file %}
+                            <a href="{{resource.resource_file.url}}" download="{{resource}}"><i class="fas fa-download"></i></a>
+                        {% else %}
+                            <i class="fas fa-link"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    {% endfor %}    
+</section>
+{% endblock %}
+    
