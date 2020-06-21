@@ -2,6 +2,7 @@ body {
     background: linear-gradient(30deg, #2E39DC, #ff0054);
     background-size: cover;
     background-repeat: no-repeat;
+    /* min-height: 100vh; */
 }
  
 .heading {
@@ -10,7 +11,7 @@ body {
     font-size: 60px;
 }
 
-.underline {
+.heading-underline {
     border: 2px solid white;
     width: 250px;
 }
@@ -19,22 +20,26 @@ body {
     .heading {
         font-size: 35px;
     }
-    .underline {
+    .heading-underline {
         border: 2px solid white;
         width: 150px;
     }
 }
 
-.modal-button {
+.filter-button {
     border: 2px solid white;
     background-color: white;
     color: #2E39DC;
 }
 
-.modal-button:hover {
+.filter-button:hover {
     background-color: transparent;
     color: white;
     transition-duration: 1s;
+}
+
+#resources-body {
+    min-height: 50vh;
 }
 
 .resource-box {
@@ -63,7 +68,14 @@ body {
     text-align: center;
 }
 
-.col-description {
+.resource-description {
     margin-left: 10px;
     color: #2E39DC;
 }
+
+.resource-icons:hover {
+    cursor: pointer;
+}
+
+
+ 

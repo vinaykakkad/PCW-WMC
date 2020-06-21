@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from home.views import home_page_view
 from resources.views import ResourcesView
+# , ResourcePagesView
 from events.views import EventsPageView
 from about.views import about_page_view 
 from django.conf.urls.static import static
@@ -27,8 +28,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_page_view, name='home'),
     path('resources/', ResourcesView.as_view(), name='resources'),
+    # path('resources/<page>', ResourcePagesView.as_view(), name='resources'),
     path('events/', EventsPageView.as_view(), name='events'),
-    path('about', about_page_view, name='about'),
+    path('about/', about_page_view, name='about'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)

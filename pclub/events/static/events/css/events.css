@@ -1,5 +1,6 @@
-#events {
-    background: linear-gradient(30deg, #2E39DC, #ff0054);
+body {
+    background: linear-gradient(75deg, #06d6a0, #2e39dc);
+    /* background-color: #06d6a0; */
     background-size: cover;
     position: relative;
 }
@@ -25,20 +26,27 @@
     }
 }
 
-.modal-button {
+.filter-button {
     border: 2px solid white;
     background-color: white;
-    color: #ff0054;
+    color: #2e39dc;
 }
 
-.modal-button:hover {
+.filter-button:hover {
     background-color: transparent;
     color: white;
     transition-duration: 1s;
 }
 
-.carousel-box
-{
+#events-body {
+    min-height: 50vh;
+}
+
+.events-row {
+    max-width: 100vw;
+}
+
+.carousel-box {
     min-width: 90vw;
     max-width: 90vw;
     min-height: 75vw;
@@ -46,16 +54,14 @@
     margin: auto;
 }
 
-.carousel-image
-{
+.carousel-image {
     min-width: 90vw;
     max-width: 90vw;
     min-height: 75vw;
     max-height: 75vw;
 }
 
-.description-box
-{
+.description-box {
     min-width: 90vw;
     max-width: 90vw;
     /* min-height: 75vw; */
@@ -65,25 +71,21 @@
     margin: auto;
 }
 
-@media screen and (min-width: 768px)
-{
-    .carousel-box
-    {
+@media screen and (min-width: 768px) {
+    .carousel-box {
         min-width: 40vw;
         max-width: 40vw;
         min-height: 35vw;
         max-height: 35vw;
         margin-right: 0px;
     }
-    .carousel-image
-    {
+    .carousel-image {
         min-width: 40vw;
         max-width: 40vw;
         min-height: 35vw;
         max-height: 35vw;
     }
-    .description-box
-    {
+    .description-box {
         min-width: 40vw;
         max-width: 40vw;
         min-height: 35vw;

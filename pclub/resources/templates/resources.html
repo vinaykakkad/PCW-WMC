@@ -1,44 +1,113 @@
 {% extends 'base.html' %} 
-{% load static %}
+{% load static %} 
 
 {% block head %}
     <title>PCW-Resources</title>
     <link rel="stylesheet" href="{% static 'resources/css/resources.css' %}">
-{% endblock %}
+    <script type="text/javascript" src="{% static 'resources/js/resources.js'%}"></script>
+{% endblock %} 
 
 {% block content %}
-<section id="resources">
-    <div class="container-fluid mt-5">
-        <p class="center-mx heading"> 
-            Resources<br>
-            <div class="container underline"></div>
-        </p>
-    </div>
-    
-    <button type="button" class="btn btn-md center-mx modal-button" data-toggle="modal" data-target="#resource_modal">Filter</button>    
-    {% include 'modal.html'%}
-    
-    {% for resource in resources %}
-        <div class="container resource-box my-5 center-mx">
-            <table class="resource-row">
-                <tr>
-                    <td class="resource-col-1">
-                        <span class="col-title"><h5><b>{{resource.title}}</b></h5></span>
-                        <!-- <br> -->
-                        <div class="col-description">{{resource.description}}</div>
-                        
-                    </td>
-                    <td class="resource-col-2">
-                        {% if resource.resource_file %}
-                            <a href="{{resource.resource_file.url}}" download="{{resource}}"><i class="fas fa-download"></i></a>
-                        {% else %}
-                            <i class="fas fa-link"></i>
-                        {% endif %}
-                    </td>
-                </tr>
-            </table>
+    <section id="resources-header">
+        <div class="container-fluid">
+            <p class="center-mx heading">
+                Resources<br>
+                <div class="container heading-underline"></div>
+            </p>
         </div>
-    {% endfor %}    
-</section>
-{% endblock %}
+
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-md filter-button" data-toggle="modal" data-target="#resource-filter-modal">Filter</button> &emsp; 
+            {% if filtered %}
+                <a href="{% url 'resources' %}?clear=1">
+                    <button type="button" class="btn btn-md filter-button">Clear</button>
+                </a>
+            {% endif %} 
+            {% include 'resource_filter_modal.html'%}
+        </div>
+    </section>
     
+    <section id="resources-body">
+        {% for resource in page_object %}
+            <div class="container resource-box my-5 center-mx">
+                <table class="resource-row">
+                    <tr>
+                        <td class="resource-col-1">
+                            <span class="resource-title"><h5><b>{{resource.title}}</b></h5></span>
+                            <div class="resource-description">{{resource.description}}</div><br>
+                            Tags:
+                            {% for tag in resource.tags.all %}
+                                {% if forloop.counter == resource.tags.all|length %}
+                                    <a href="{% url 'resources' %}?tags={{tag}}">{{tag}}</a>
+                                {% else %}
+                                    <a href="{% url 'resources' %}?tags={{tag}}">{{tag}}, </a>
+                                {% endif %} 
+                            {% endfor %}
+                        </td>
+                        <td class="resource-col-2">
+                            {% if resource.files.all|length is not 0 %}
+                            <i data-toggle="modal" data-target="#resource-files-modal-{{forloop.counter}}" class="fas fa-download resource-icons"></i> 
+                            <br><br>
+                            {% endif %}
+                            {% if resource.links.all|length is not 0 %}
+                            <i class="fas fa-link resource-icons" data-toggle="modal" data-target="#resource-links-modal-{{forloop.counter}}"></i> 
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="modal fade" id="resource-files-modal-{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="resource-files-modal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Resource-File</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul>
+                                {% for file in resource.files.all %}
+                                <li>
+                                    {{file.name}} :
+                                    <a href="{{file.url}}" download="{{file.name}}" target="_blank"><i class="fas fa-download ml-auto"></i></a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal fade" id="resource-links-modal-{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="resource-links-modal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Resource-File</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                        </div>
+                        <div class="modal-body">
+                            <ol>
+                                {% for link in resource.links.all %}
+                                <li>{{link.name}} : <a href="{{link}}" target="_blank">{{link}}</a></li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="container-fluid d-flex justify-content-center no-results">
+            {% if page_object|length is 0 %}
+                No resources found!!!
+            {% endif %}
+        </div>
+    </section>
+
+    <section id="resources-footer">
+        {% include 'pagination.html' %}
+    </section>
+{% endblock %}

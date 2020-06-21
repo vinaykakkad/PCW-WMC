@@ -8,18 +8,22 @@ class Tags(models.Model):
         return self.tag
 
 class Resources(models.Model):
-    title = models.CharField(max_length=300)
-    resource_file = models.FileField(upload_to="resources/uploads", null=True, blank=True)
-    link = models.CharField(max_length=500, null=True, blank=True)
+    title = models.CharField(max_length=300, unique=True)
     description = models.TextField(max_length=500, default="")
     tags = models.ManyToManyField(Tags)
 
     def __str__(self):
         return self.title
 
-    def get_tags(self):
-        tag_names=[]    
-        tags = self.tags.all()
-        for i in tags:
-            tag_names.append(i.tag)
-        return set(tag_names)
+class Files(models.Model):
+    name = models.CharField(max_length=220, default="")
+    resource = models.ForeignKey(Resources, on_delete=models.CASCADE, related_name="files")
+    resource_file = models.FileField(upload_to="resouces/uploads")
+
+class Links(models.Model):
+    name = models.CharField(max_length=220, default="")
+    resource = models.ForeignKey(Resources, on_delete=models.CASCADE, related_name="links") 
+    resource_links = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.resource_links

@@ -4,10 +4,11 @@
 {% block head %}
     <title>PCW-Events</title>
     <link rel="stylesheet" href="{% static 'events/css/events.css'%}">
+    <script src="{% static 'events/js/events.js' %}"></script>
 {% endblock %}
 
 {% block content%}
-<section id="events">
+<section id="events-header">
     <div class="container-fluid pt-5">
         <p class="center-mx heading"> 
             Events<br>
@@ -15,10 +16,21 @@
         </p>
     </div>
     
-    <button type="button" class="btn btn-md center-mx modal-button" data-toggle="modal" data-target="#resource_modal">Filter</button>    
-    
-    {% for event in events %}
-        <div class="row py-5">
+    <div class="container-fluid d-flex justify-content-center">
+    <button type="button" class="btn btn-md filter-button" data-toggle="modal" data-target="#events_modal">Filter</button>    
+    {% if filtered %}
+        &emsp;
+        <a href="{% url 'events' %}?clear=1">
+            <button type="button" class="btn btn-md filter-button">Clear</button>
+        </a>
+    {% endif %}
+    </div>
+    {% include 'events_modal.html' %}
+</section>
+
+<section id="events-body">
+    {% for event in page_object %}
+        <div class="row events-row m-0 py-5">
             <div class="col-md d-flex align-items-center mp-0">
                 <div class="carousel-box">
                     {% include 'events_carousel.html' %}
@@ -34,12 +46,24 @@
                             {{event.description}}
                         </span><br><br>
                         <span class="">
-                            Date: {{event.date}}
+                            Date: {{event.start_date}} - {{event.end_date}}
                         </span><br><br>
+                        <span class="">
+                            {% if event.is_registration_active %}
+                            <a href="{{event.registration_link}}" target="_blank">
+                                <button class="btn btn-md btn-light">Register</button>
+                            </a>
+                            {% endif %}
+                        </span>
                     </div>
                 </div>        
             </div>
         </div>
     {% endfor %}    
+</section>
+
+<section id="event-footer">
+    {% include 'pagination.html' %}
+    {% include 'footer.html' %}
 </section>
 {% endblock %} 

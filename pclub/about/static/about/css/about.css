@@ -55,18 +55,12 @@ body {
     backface-visibility: hidden;
 }
 
-.flip-card-front {
-    background-color: #bbb;
-    color: black;
-}
-
 .flip-card-back {
-    background-color: #2980b9;
-    color: white;
+    background-color: white;
+    color: #ff0054;
     transform: rotateY(180deg);
 }
 
-.img-circle
-{
+.img-circle {
     border-radius: 50%;
 }
