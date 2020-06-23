@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from home.views import home_page_view
 from resources.views import ResourcesView
-# , ResourcePagesView
+from account.views import RegisterView, LoginView, EmailActivateView, ForgotPasswordView, PasswordSetterView, logout_view
 from events.views import EventsPageView
 from about.views import about_page_view 
 from django.conf.urls.static import static
@@ -26,10 +26,21 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # home
     path('', home_page_view, name='home'),
+    # account
+    path('login/', LoginView.as_view(), name='user_login'),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('activate/<uidb64>/<token>', EmailActivateView.as_view(), name='activate'),
+    path('password/forgot/', ForgotPasswordView.as_view(), name='forgot_password'),
+    path('password/reset/', PasswordSetterView.as_view(), name='reset_password'),
+    path('password/reset/<username64>/<token>/', PasswordSetterView.as_view(), name='reset_password'),
+    path('logout/', logout_view, name='logout'),
+    # resources
     path('resources/', ResourcesView.as_view(), name='resources'),
-    # path('resources/<page>', ResourcePagesView.as_view(), name='resources'),
+    # events
     path('events/', EventsPageView.as_view(), name='events'),
+    # about
     path('about/', about_page_view, name='about'),
 ]
 

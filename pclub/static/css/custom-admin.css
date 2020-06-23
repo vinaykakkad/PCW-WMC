@@ -1,0 +1,91 @@
+/* ----------Table of Contents------------
+
+    1.Admin-Login Page 
+    
+    
+------------------------------------------   */
+body {
+    background-color: #74c69d;
+}
+
+* #header {
+    background-color: #1b4332;
+}
+
+div .breadcrumbs {
+    background-color:  #40916c;
+}
+
+#changelist a {
+    color: #1b4332;
+}
+
+#changelist .actions {
+    background-color: #b7e4c7;
+    color: black;
+}
+
+.row1 {
+    background-color: #b7e4c7;
+}
+/* ------ Admmin-Login Page------     */
+body.login {
+    background-color: #1b4332;
+    min-height: 100vh;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.login #container {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 28em;
+    min-width: 300px;
+    margin: 100px auto;
+}
+
+.login #header, .login #content, .login #footer {
+    background: #74c69d;
+}
+
+.login #header h1 a {
+    color: white;
+    font-size: larger;
+}
+
+.login .submit-row input {
+    background: white;
+    color: #74c69d;
+    border: 2px solid white;
+}
+
+.login .submit-row input:hover {
+    background: #74c69d;
+    color: white;
+    transition-duration: 1s;
+}
+
+/* ------ Admmin-Dashboard Page------     */
+body.dashboard {
+    background-color: #74c69d;
+}
+
+body.dashboard #header {
+    background-color: #1b4332;
+}
+
+body.dashboard caption {
+    background-color: #1b4332;
+}
+
+body.dashboard tr a {
+    color: #1b4332;
+}
+
+body.dashboard #content-related {
+    margin-left: auto;
+}
+
+body.dashboard #content-related a {
+    color: #1b4332;
+}

@@ -75,4 +75,4 @@ class EventsPageView(TemplateView):
 
         context = {'page_object': events,
                    'filtered': filtered, 'page_name': events}
-        return render(request, 'events.html', context)
+        return render(request, 'events/events.html', context)

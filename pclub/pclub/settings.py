@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'events',
     'resources',
     'about',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pclub.wsgi.application'
 
+AUTH_USER_MODEL = 'account.Account'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -131,3 +133,9 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'samkit'
+EMAIL_HOST_PASSWORD = 'Abcd1234!!'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587

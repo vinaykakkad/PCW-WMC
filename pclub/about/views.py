@@ -5,4 +5,4 @@ from .models import Committee
 def about_page_view(request, *args, **kwargs):
     committee = Committee.objects.all()
     context = {'committee': committee}
-    return render(request, 'about.html', context)
+    return render(request, 'about/about.html', context)

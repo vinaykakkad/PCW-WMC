@@ -25,12 +25,12 @@
         {% endfor %} 
         {% if page_object.has_next %}
             <li class="page-item">
-                <a class="left-icon page-link" href="?page=1">
+                <a class="left-icon page-link" href="?page={{ page_object.next_page_number }}">
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="page-item">
-                <a class="left-icon page-link" href="?page={{ page_object.next_page_number }}">
+                <a class="left-icon page-link" href="?page={{ last_page }}">
                     <i class="fas fa-angle-double-right"></i>
                 </a>
             </li>

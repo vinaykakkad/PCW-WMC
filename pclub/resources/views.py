@@ -60,6 +60,5 @@ class ResourcesView(TemplateView):
         page = request.GET.get('page')
         resources = paginator.get_page(page)
 
-        context = {'page_object': resources,
-                   'tags': all_tags, 'filtered': filtered}
-        return render(request, 'resources.html', context)
+        context = {'page_object': resources, 'tags': all_tags, 'filtered': filtered, 'last_page': paginator.num_pages }
+        return render(request, 'resources/resources.html', context)

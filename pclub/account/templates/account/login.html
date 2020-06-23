@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block head %}
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'account/css/auth.css'%}">
+{% endblock %}
+
+{% block content %}
+    {% include 'messages.html'%}
+    <div class="container auth-box mx-auto pb-3">
+        <form action="{% url 'user_login' %}" method="POST">
+            {% csrf_token %}
+            <div class="container auth-box-header">
+                Login
+            </div>
+            {% for field in form %}
+                <label for="{{field.label}}"><b>{{field.label}}</b></label>
+                {{field}}
+            {% endfor %}
+            <button type="submit" class="btn auth-button">Log in</button>
+        </form>
+    </div>
+    <div class="auth-box-footer mx-auto my-2">
+        <table>
+            <tr>
+                <td>New User??<a href="{% url 'register' %}">Sign up</a></td>
+                <td><a href="{% url 'forgot_password' %}">Forgot Password??</a></td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

@@ -10,6 +10,25 @@
 
     <div class="collapse navbar-collapse " id="mynav">
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            {% if request.user.is_authenticated %}
+                <li class="nav-item link-class dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="nav-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Hi, {{request.user.username}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="nav-dropdown">
+                        <a class="dropdown-item" href="#">Codeforces</a>
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Action</a>
+                    </div>
+                </li>
+            {% else %}
+                <li class="nav-item ">
+                    <a class="nav-link link-class" href="{% url 'user_login' %}">Login</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link link-class" href="{% url 'register' %}">Register</a>
+                </li>
+            {% endif %}
             <li class="nav-item active">
                 <a class="nav-link link-class" href="{% url 'home' %}">Home</a>
             </li>

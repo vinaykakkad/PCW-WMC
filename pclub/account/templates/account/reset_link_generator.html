@@ -1,0 +1,4 @@
+{% autoescape off %}
+    Hi {{user.username}}
+    Link: http://{{domain}}{% url 'reset_password' username64=encoded_username token=token %}
+{% endautoescape %}
