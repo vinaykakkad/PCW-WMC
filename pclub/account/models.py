@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # Create your models here.
 
 
+# Account Manger for custom user model
 class AccountManager(BaseUserManager):
 
     def create_user(self, username, email, password=None, fullname=None, cf_username=None,
@@ -18,7 +19,7 @@ class AccountManager(BaseUserManager):
             username=username,
             email=self.normalize_email(email),
             fullname=fullname,
-            cf_username = cf_username
+            cf_username=cf_username
         )
 
         user.set_password(password)
@@ -52,17 +53,17 @@ class AccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
-    # custom fields 
+    # custom fields
     username = models.CharField(unique=True, max_length=220)
     email = models.EmailField(unique=True)
     fullname = models.CharField(max_length=220, blank=True, null=True)
-    cf_username = models.CharField(unique=True, max_length=220, blank=True, null=True) 
+    cf_username = models.CharField(
+        unique=True, max_length=220, blank=True, null=True)
     # required fields
     is_active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_activated = models.BooleanField(default=False)
-
 
     # this is the field that will be asked during authentication
     USERNAME_FIELD = 'username'

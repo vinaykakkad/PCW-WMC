@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>PCW-Profile</title>
+    <link rel="stylesheet" href="{% static 'account/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="profile-box mx-auto mb-5">
+            <h3>Profile</h3>
+            <table class="table-striped">
+                <tr>
+                    <td class="col-1">Username:</td>
+                    <td class="col-2">{{request.user.username}}</td>
+                </tr>
+                <tr>
+                    <td class="col-1">Fullname:</td>
+                    <td class="col-2">{{request.user.fullname}}</td>
+                </tr>
+                <tr>
+                    <td class="col-1">Email:</td>
+                    <td class="col-2">{{request.user.email}}
+                        </td>
+                </tr>
+                <tr>
+                    <td class="col-1">Codeforces id:</td>
+                    <td class="col-2">{{request.user.cf_username}}</td>
+                </tr>
+            </table>
+
+            <button type="button" class="btn btn-md profile-button mt-3" data-toggle="modal" data-target="#password-modal">Change Password</button><br>
+            <button type="button" class="btn btn-md profile-button my-3" data-toggle="modal" data-target="#cfid-modal">Update CF id</button>              
+        </div>
+
+        {% include 'account\profile\change_password_modal.html' %}
+        {% include 'account\profile\change_cfid_modal.html' %}
+{% endblock %}

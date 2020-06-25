@@ -8,13 +8,17 @@
             </div>
             <div class="modal-body">
                 <form action="{% url 'events' %} " method="GET" class="form-group needs-validation" novalidate>
+                    <label for="title">By Title:</label>
+                    <input type="text" name="title" placeholder="Title" class="form-control">
+                    <br>
                     <label for="when">By Time:</label>
-                    <select name="when" id="" class="form-control" required>
+                    <select name="when" class="form-control" required>
                         <option value="none">None</option>
                         <option value="past">Past</option>
                         <option value="current">Current</option>
                         <option value="future">Future</option>
-                    </select><br><br>
+                    </select>
+                    <br>
                     <div class="form-row">
                         <label for="month">By Month:</label>
                         <input type="month" name="month" placeholder="yyyy-mm" class="form-control" pattern="[0-9]{4}-[0-9]{2}" ">
@@ -22,7 +26,7 @@
                             Date should be in the format yyyy-mm
                         </div>
                     </div><br><br>
-                    <button type="submit " class="btn btn-dark ">Filter</button>
+                    <button type="submit" class="btn btn-dark center-mx">Filter</button>
                 </form>    
             </div>
         </div>

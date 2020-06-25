@@ -2,6 +2,7 @@ from django.contrib import admin
 from.models import Tags, Resources, Files, Links
 # Register your models here.
 
+
 admin.site.register(Tags)
 
 class FileAdmin(admin.StackedInline):

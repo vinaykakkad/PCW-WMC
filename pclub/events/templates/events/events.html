@@ -7,7 +7,7 @@
     <script src="{% static 'events/js/events.js' %}"></script>
 {% endblock %}
 
-{% block content%}
+{% block content %}
 <section id="events-header">
     <div class="container-fluid pt-5">
         <p class="center-mx heading"> 
@@ -29,6 +29,11 @@
 </section>
 
 <section id="events-body">
+    <div class="container-fluid d-flex justify-content-center no-results">
+        {% if page_object|length == 0 %}
+            <h3 class="text-white">No events found!!!</h3>
+        {% endif %}
+    </div>
     {% for event in page_object %}
         <div class="row events-row m-0 py-5">
             <div class="col-md d-flex align-items-center mp-0">

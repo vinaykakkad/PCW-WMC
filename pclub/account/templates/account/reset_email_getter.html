@@ -6,7 +6,6 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'messages.html' %}
     <div class="auth-box mx-auto p-3">
         <div class="auth-box-header">Reset Password </div>
         <form action="{% url 'forgot_password' %}" method="POST">

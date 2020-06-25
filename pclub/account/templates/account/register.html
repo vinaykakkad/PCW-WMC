@@ -6,7 +6,6 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'messages.html'%}
     <div class="container auth-box center-mx pb-3">
         <form action="{% url 'register' %}" method="POST">
             {% csrf_token %}

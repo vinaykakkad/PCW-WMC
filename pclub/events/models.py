@@ -1,11 +1,10 @@
-from datetime import datetime
 import pytz
+from datetime import datetime
 
 from django.db import models
 
 # Create your models here.
-# class Tags(models.Model):
-#     tag_name = 
+
 
 class Events(models.Model):
     title = models.CharField(max_length=300)
@@ -22,6 +21,7 @@ class Events(models.Model):
             return True
         else:
             return False
+
 
 class Images(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE, related_name="images")

@@ -1,0 +1,60 @@
+body {
+    background-color: #403d39;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-size: 18px;
+    min-height: 90vh;
+}
+
+h3 {
+    text-align: center;
+    color: white;
+}
+
+
+
+.statistics-box {
+    color: white;
+    width: 300px;
+    margin-top: 100px;
+    text-align: center;
+}
+
+.statistics-box table {
+    border-radius: 10px;
+    background-color: white;
+}
+
+.statistics-box td {
+    padding: 10px;
+    height: 30px;
+}
+
+#comments-div {
+    font-size: 10px;
+    color: white;
+    text-align: center;
+}
+
+.charts-container {
+    position: relative;
+    height: 50vw;
+    width: 100vw;
+}
+
+@media only screen and (min-width: 600px) {
+    .statistics-box {
+        width: 540px;
+    }
+    .charts-container {
+        height: 40vw;
+        width: 80vw;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .charts-container {
+        height: 35vw;
+        width: 70vw;
+    }
+}

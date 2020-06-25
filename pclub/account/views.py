@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -16,15 +17,10 @@ from django.db.models import Q
 from .forms import LoginForm, RegisterForm
 from .models import Account, AccountManager
 from .utils import generate_token
-
+from env import EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, EMAIL_PORT
 # Create your views here.
 
 
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
-EMAIL_PORT = os.getenv('EMAIL_PORT')
 account_manager = AccountManager()
 
 
@@ -238,6 +234,74 @@ class PasswordSetterView(View):
         else:
             messages.erroe(request, 'Passwords didn\'t match. Get link again.')
             return redirect('forgot_password')
+
+
+class ProfileView(LoginRequiredMixin, View):
+    """
+        View for profile page
+
+        Details of the users are displayed.
+        User can update password and CF id.
+    """
+    login_url = '/login/'
+    redirect_field_name = 'profile'
+
+    def get(self, request, *args, **kwargs):
+        context = {}
+        return render(request, 'account/profile/profile.html', context)
+
+    def post(self, request, *agrs, **kwargs):
+        field = request.POST.get('field')
+
+        if field == 'password':
+            old_password = request.POST.get('old')
+            try:
+                user = authenticate(
+                    request, username=request.user.username, password=old_password)
+            except Exception as identifier:
+                user = None
+
+            if user is None:
+                messages.error(request, 'Password couldn\'t be verified')
+            else:
+                password1 = request.POST.get('password1')
+                password2 = request.POST.get('password2')
+
+                if password1 == password2:
+                    request.user.set_password(password2)
+                    request.user.save()
+                    messages.info(request, 'Password changed successfully')
+                else:
+                    messages.error(request, 'New Password didn\'t match')
+
+            return redirect('profile')
+
+        else:
+            password = request.POST.get('password')
+            try:
+                user = authenticate(
+                    request, username=request.user.username, password=password)
+            except Exception as identifier:
+                user = None
+
+            if user is None:
+                messages.error(request, 'Password couldn\'t be verified')
+            else:
+                cf_username = request.POST.get('cf_username')
+
+                try:
+                    user = Account.objects.get(cf_username=cf_username)
+                except Exception as identifier:
+                    user = None
+
+                if user is None:
+                    request.user.cf_username = cf_username
+                    request.user.save()
+                    messages.info(request, 'Username updated successfully')
+                else:
+                    messages.error(request, 'Username is already in use')
+
+            return redirect('profile')
 
 
 @login_required

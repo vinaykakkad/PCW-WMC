@@ -1,0 +1,9 @@
+Python tricks:
+
+1. Ternary Condition:
+	x = 1 if condition else 0
+
+2. Can add underscores in large numbers:
+	x = 10_000_000_000
+	
+	->print(f'{total: ,}) to print large numbers with seprators

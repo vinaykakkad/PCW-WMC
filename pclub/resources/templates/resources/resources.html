@@ -4,7 +4,6 @@
 {% block head %}
     <title>PCW-Resources</title>
     <link rel="stylesheet" href="{% static 'resources/css/resources.css' %}">
-    <script type="text/javascript" src="{% static 'resources/js/resources.js'%}"></script>
 {% endblock %} 
 
 {% block content %}
@@ -28,6 +27,12 @@
     </section>
     
     <section id="resources-body">
+        <div class="container-fluid d-flex justify-content-center no-results">
+            {% if page_object|length == 0 %}
+                <h3 class="text-white">No resources found!!!</h3>
+            {% endif %}
+        </div>
+        
         {% for resource in page_object %}
             <div class="container resource-box my-5 center-mx">
                 <table class="resource-row">
@@ -100,11 +105,6 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="container-fluid d-flex justify-content-center no-results">
-            {% if page_object|length is 0 %}
-                No resources found!!!
-            {% endif %}
-        </div>
     </section>
 
     <section id="resources-footer">

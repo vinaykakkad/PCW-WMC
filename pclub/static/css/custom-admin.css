@@ -4,6 +4,7 @@
     
     
 ------------------------------------------   */
+
 body {
     background-color: #74c69d;
 }
@@ -13,7 +14,7 @@ body {
 }
 
 div .breadcrumbs {
-    background-color:  #40916c;
+    background-color: #40916c;
 }
 
 #changelist a {
@@ -28,7 +29,10 @@ div .breadcrumbs {
 .row1 {
     background-color: #b7e4c7;
 }
+
+
 /* ------ Admmin-Login Page------     */
+
 body.login {
     background-color: #1b4332;
     min-height: 100vh;
@@ -44,7 +48,9 @@ body.login {
     margin: 100px auto;
 }
 
-.login #header, .login #content, .login #footer {
+.login #header,
+.login #content,
+.login #footer {
     background: #74c69d;
 }
 
@@ -65,7 +71,9 @@ body.login {
     transition-duration: 1s;
 }
 
+
 /* ------ Admmin-Dashboard Page------     */
+
 body.dashboard {
     background-color: #74c69d;
 }

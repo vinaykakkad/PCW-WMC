@@ -24,7 +24,8 @@ body {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(46, 57, 220)' stroke-width='1.5' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
-.link-class, .link-class a {
+.link-class,
+.link-class a {
     font-size: 18px;
     color: #2E39DC;
     text-align: center;
@@ -92,6 +93,12 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.center-x {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .center-xy {

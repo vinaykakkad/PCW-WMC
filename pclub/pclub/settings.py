@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+from env import EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, EMAIL_PORT
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'resources',
     'about',
     'account',
+    'cfapi'
 ]
 
 MIDDLEWARE = [
@@ -133,9 +136,3 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'samkit'
-EMAIL_HOST_PASSWORD = 'Abcd1234!!'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587

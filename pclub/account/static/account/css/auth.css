@@ -14,7 +14,6 @@ body {
     margin-top: 100px;
 }
 
-
 .auth-box-header {
     text-align: center;
     font-size: 35px;
@@ -32,11 +31,12 @@ body {
     border-radius: 3px;
 }
 
-.auth-box-footer, .auth-box-footer table {
+.auth-box-footer,
+.auth-box-footer table {
     width: 300px;
 }
 
-.auth-box-footer *{
+.auth-box-footer * {
     font-size: 12px;
     color: white;
     text-align: center;
@@ -52,14 +52,15 @@ body {
 
 .auth-button:hover {
     background-color: transparent;
-    color:#ff0054;
+    color: #ff0054;
     transition-duration: 1s;
 }
 
-.auth-box a,.auth-box a:hover {
+.auth-box a,
+.auth-box a:hover {
     color: white;
 }
-        
+
 .footer-right-align {
     align-self: flex-end;
 }
@@ -68,7 +69,8 @@ body {
     .auth-box {
         max-width: 540px;
     }
-    .auth-box-footer, .auth-box-footer table {
+    .auth-box-footer,
+    .auth-box-footer table {
         width: 540px;
     }
 }

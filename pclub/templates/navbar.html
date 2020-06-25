@@ -16,9 +16,11 @@
                         Hi, {{request.user.username}}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="nav-dropdown">
-                        <a class="dropdown-item" href="#">Codeforces</a>
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="{% url 'logout' %}">Action</a>
+                        {% if request.user.cf_username|length is not 0 %}
+                            <a class="dropdown-item" href="{% url 'cfapi' %}">Codeforces</a>
+                        {% endif %}
+                        <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                     </div>
                 </li>
             {% else %}

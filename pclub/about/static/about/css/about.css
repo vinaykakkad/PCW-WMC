@@ -15,13 +15,32 @@ body {
     width: 250px;
 }
 
+.underline-small {
+    border: 2px solid white;
+    width: 150px;
+}
+
+.description {
+    text-align: justify;
+    color: white;
+    font-size: 18px;
+    padding: 10 50 10 50;
+}
+
 @media screen and (max-width: 600px) {
     .heading {
         font-size: 35px;
+        text-align: center;
     }
     .underline {
         border: 2px solid white;
         width: 150px;
+    }
+    .description {
+        padding: 10 10 10 10;
+    }
+    .underline-small {
+        width: 75px;
     }
 }
 
@@ -39,7 +58,6 @@ body {
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
 }
 
 .flip-card:hover .flip-card-inner {

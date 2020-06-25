@@ -17,9 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from home.views import home_page_view
 from resources.views import ResourcesView
-from account.views import RegisterView, LoginView, EmailActivateView, ForgotPasswordView, PasswordSetterView, logout_view
+from account.views import RegisterView, LoginView, EmailActivateView, ForgotPasswordView, PasswordSetterView, logout_view, ProfileView
 from events.views import EventsPageView
 from about.views import about_page_view 
+from cfapi.views import cfapi_view
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
@@ -36,12 +37,15 @@ urlpatterns = [
     path('password/reset/', PasswordSetterView.as_view(), name='reset_password'),
     path('password/reset/<username64>/<token>/', PasswordSetterView.as_view(), name='reset_password'),
     path('logout/', logout_view, name='logout'),
+    path('profile/', ProfileView.as_view(), name='profile'),
     # resources
     path('resources/', ResourcesView.as_view(), name='resources'),
     # events
     path('events/', EventsPageView.as_view(), name='events'),
     # about
     path('about/', about_page_view, name='about'),
+    # cfapi
+    path('cfapi/', cfapi_view, name='cfapi')
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)

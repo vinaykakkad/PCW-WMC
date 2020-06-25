@@ -2,36 +2,50 @@
 {% load static %} 
 
 {% block head %}
-<title>PCW-About</title>
-<link rel="stylesheet" href="{% static 'about/css/about.css' %}"> 
+    <title>PCW-About</title>
+    <link rel="stylesheet" href="{% static 'about/css/about.css' %}"> 
 {% endblock %} 
 
 {% block content %}
-<section class="about">
-    <div class="container-fluid mt-5">
-        <p class="center-mx heading">
-            Committee<br>
-            <div class="container underline"></div>
-        </p>
-    </div>
-    <div class="row">
-    {% for member in committee %}
-        <div class="col-lg-4 col-md-6 col-sm-12 d-flex my-5 justify-content-center">
-            <div class="flip-card">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front" style="background-color: transparent">
-                        <img src="{{member.image.url}}" class="img-circle" alt="Profile" style="width:300px;height:300px;">
-                    </div>
-                    <div class="flip-card-back">
-                        <h1>{{member.name}}</h1>
-                        <p>{{member.designation}}</p>
-                        <p>{{member.email}}</p>
+    <section id="about-head">
+        <div class="container-fluid mt-5">
+            <p class="heading">
+                PClub<br>
+                <div class="container underline-small"></div>
+            </p>
+            <p class="description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit in rerum assumenda facere, dolores aut! Impedit saepe ea soluta placeat, molestias voluptatem id quas alias aperiam voluptatibus sunt velit ipsa.
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste delectus voluptas facilis voluptatum doloremque, nobis soluta. Fugit reprehenderit fugiat, ut porro sint ipsa nisi, perspiciatis error incidunt illum qui nulla.
+            </p>
+        </div>
+    </section>    
+    <section id="about-body">
+        <div class="container-fluid mt-5">
+            <p class="heading">
+                Committee<br>
+                <div class="container underline"></div>
+            </p>
+        </div>
+        <div class="row">
+        {% for member in committee %}
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex my-5 justify-content-center">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front" style="background-color: transparent">
+                            <img src="{{member.image.url}}" class="img-circle" alt="Profile" style="width:300px;height:300px;">
+                        </div>
+                        <div class="flip-card-back">
+                            <h1>{{member.name}}</h1>
+                            <p>{{member.designation}}</p>
+                            <p>{{member.email}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
+        {% endfor %}
         </div>
-    {% endfor %}
-    </div>
-</section>
-    {% include 'footer.html' %}
+    </section>
+    <section>
+        {% include 'footer.html' %}
+    </section>
 {% endblock %}

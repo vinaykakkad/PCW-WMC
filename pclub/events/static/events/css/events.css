@@ -1,6 +1,5 @@
 body {
     background: linear-gradient(75deg, #06d6a0, #2e39dc);
-    /* background-color: #06d6a0; */
     background-size: cover;
     position: relative;
 }
@@ -64,7 +63,6 @@ body {
 .description-box {
     min-width: 90vw;
     max-width: 90vw;
-    /* min-height: 75vw; */
     background-color: #403d39;
     color: white;
     padding: 10px;

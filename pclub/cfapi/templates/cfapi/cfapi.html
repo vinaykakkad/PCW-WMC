@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>PCW-Cfapi</title>
+    <link rel="stylesheet" href="{% static 'cfapi/css/cfapi.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>
+    <script src="https://unpkg.com/chartjs-plugin-colorschemes"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+        var ctx = document.getElementById('tags-chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys({{all_tags|safe}}),
+                datasets: [{
+                    data: Object.values({{all_tags|safe}}),
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                plugins: {
+                    colorschemes: {
+                        scheme: 'tableau.HueCircle19'
+                    }
+                }
+            }
+        });
+
+        var ctx = document.getElementById('results-chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys({{all_verdicts|safe}}),
+                datasets: [{
+                    data: Object.values({{all_verdicts|safe}}),
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                plugins: {
+                    colorschemes: {
+                        scheme: 'tableau.HueCircle19'
+                    }
+                }
+            }
+        });
+    });
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% if status == 'OK' %}
+        <div class="statistics-box mx-auto">
+            <h3>Stats</h3>
+            <table class="table-striped">
+                <tr>
+                    <td class="col-1">Total Submissions:</td>
+                    <td class="col-2">{{total}}</td>
+                </tr>
+                <tr>
+                    <td class="col-1">Accepted:</td>
+                    <td class="col-2">{{correct}}</td>
+                </tr>
+                <tr>
+                    <td class="col-1">Favourite Category<sup><a href="#comments-div">*</a></sup>:</td>
+                    <td class="col-2">
+                        {{max_tag}}   
+                        {% if max_tag is not None %}
+                            <a href="{% url 'resources' %}?tags={{max_tag}}">Check resources</a>
+                        {% endif %}
+                        </td>
+                </tr>
+                <tr>
+                    <td class="col-1">Weak Category<sup><a href="#comments-div">*</a></sup>:</td>
+                    <td class="col-2">
+                        {{max_wrong_tag}}   
+                        {% if max_wrong_tag is not None %}
+                            <a href="{% url 'resources' %}?tags={max_wrong_tag}}">Check resources</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="comments-div" class="mx-auto mb-5">
+            * Most occuring tag in your submissions<br>
+            ** Most occuring tag in wrong submissions
+        </div>
+
+        {% if total != 0%}
+            <h3>Results</h3>
+            <div class="charts-container mx-auto mb-5">
+                <canvas id="results-chart"></canvas>
+            </div>    
+
+            <h3>Tags</h3>
+            <div class="charts-container mx-auto mb-5">
+                <canvas id="tags-chart"></canvas>
+            </div>   
+        {% else %}
+            <h3>No problems solved yet</h3>
+        {% endif %}    
+    {% else %}
+        <h3>Something went wrong, please try again.</h3>   
+    {% endif %}
+{% endblock %}

@@ -49,8 +49,13 @@ class ResourcesView(TemplateView):
             filtered = True
             received_tags = request.session['tags']
             filter_tags = set(Tags.objects.filter(tag__in=received_tags))
-            resources = resources.filter(tags__in=filter_tags)
+            final_resources = []
+            for resource in resources:
+                if filter_tags.issubset(set(resource.tags.all())):
+                    final_resources.append(resource)
 
+            resources = final_resources
+            
         if request.session['title'] is not None:
             filtered = True
             filter_title = request.session['title']
