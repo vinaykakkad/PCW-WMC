@@ -20,7 +20,7 @@ from resources.views import ResourcesView
 from account.views import RegisterView, LoginView, EmailActivateView, ForgotPasswordView, PasswordSetterView, logout_view, ProfileView
 from events.views import EventsPageView
 from about.views import about_page_view 
-from cfapi.views import cfapi_view
+from cfapi.views import cfapi_view, github_api_view
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
@@ -45,6 +45,7 @@ urlpatterns = [
     # about
     path('about/', about_page_view, name='about'),
     # cfapi
+    path('github/', github_api_view, name='github'),
     path('cfapi/', cfapi_view, name='cfapi')
 ]
 

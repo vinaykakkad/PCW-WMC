@@ -55,6 +55,7 @@ class RegisterView(TemplateView):
         username = request.POST.get('username')
         email = request.POST.get('email')
         cf_username = request.POST.get('cf_username')
+        githun_username = request.POST.get('github_username')
         fullname = request.POST.get('fullname')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
@@ -82,8 +83,9 @@ class RegisterView(TemplateView):
             messages.error(request, 'Passwords didn\'t match!!')
             return redirect('register')
 
-        user = Account(username=username, email=email, cf_username=cf_username,
-                       fullname=fullname, password=password1)
+        user = Account(username=username, email=email, 
+                       cf_username=cf_username, fullname=fullname,
+                       github_username=githun_username, password=password1)
         user.set_password(password1)
         user.save()
 

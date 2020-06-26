@@ -19,6 +19,10 @@ class RegisterForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'fields form-control',
         'autocomplete': 'off', 'placeholder': 'Codeforces id'}
     ))
+    github_username = forms.CharField(label='Github id', required=False, 
+        widget=forms.TextInput(attrs={'class': 'fields form-control',
+        'autocomplete': 'off', 'placeholder': 'Github id'}
+    ))
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput(
         attrs={'class': 'fields form-control', 'autocomplete': 'off',
                'placeholder': 'Password'}

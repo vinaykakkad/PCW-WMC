@@ -9,8 +9,9 @@ class AccountManager(BaseUserManager):
         User Manager for custom user model
     """
 
-    def create_user(self, username, email, password=None, fullname=None, cf_username=None,
-                    is_active=True, is_staff=False, is_superuser=False, is_activated=False):
+    def create_user(self, username, email, password=None, fullname=None, 
+                    cf_username=None, github_username=None, is_active=True, 
+                    is_staff=False, is_superuser=False, is_activated=False):
         if not username:
             raise ValueError('Users must have a unique username.')
         if not email:
@@ -22,7 +23,8 @@ class AccountManager(BaseUserManager):
             username=username,
             email=self.normalize_email(email),
             fullname=fullname,
-            cf_username=cf_username
+            cf_username=cf_username,
+            github_username=github_username
         )
 
         user.set_password(password)
@@ -64,8 +66,8 @@ class Account(AbstractBaseUser):
     username = models.CharField(unique=True, max_length=220)
     email = models.EmailField(unique=True)
     fullname = models.CharField(max_length=220, blank=True, null=True)
-    cf_username = models.CharField(
-        unique=True, max_length=220, blank=True, null=True)
+    cf_username = models.CharField(max_length=220, blank=True, null=True)
+    github_username = models.CharField(max_length=220, blank=True, null=True)
     # required fields
     is_active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)

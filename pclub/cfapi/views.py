@@ -75,3 +75,52 @@ def cfapi_view(request, *args, **kwrags):
                'all_tags': json.dumps(all_tag_count)}
 
     return render(request, 'cfapi/cfapi.html', context)
+
+
+@login_required
+def github_api_view(request, *args, **kwrags):
+    """
+        Github API view
+
+        Gets the data of the user using Github users API 
+        and prepares statistics form it.
+    """
+
+    user = request.user.github_username
+    all_languages = dict()
+    max_language = None
+    status = False
+    repos = 0
+
+    a = 'https://api.github.com/users/' + user + '/repos'
+
+    response = requests.get('https://api.github.com/users/' + user + '/repos')
+    response = response.json()
+
+    try:
+        response['message']
+    except Exception as identifier:
+        status = True
+
+    if status:
+        for repository in response:
+            repos += 1
+            language_url = repository['languages_url']
+            languages_response = requests.get(language_url)
+            languages_response = languages_response.json()
+
+            for language in languages_response:
+                if language in all_languages:
+                    all_languages[language] += languages_response[language]
+                else:
+                    all_languages[language] = languages_response[language]
+
+        try:
+            max_language = max(all_languages, key=all_languages.get)
+        except Exception as identifier:
+            max_language = None
+
+    context = {'status': status, 'repos': repos, 'max_language': max_language,
+               'all_languages': json.dumps(all_languages)}
+        
+    return render(request, 'cfapi/githubapi.html', context)
