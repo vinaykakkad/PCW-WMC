@@ -27,7 +27,7 @@ account_manager = AccountManager()
 # Generating token and sending mail for activating account
 def send_activation_email(request, user, email):
     current_site = get_current_site(request)
-    subject = 'Brand Hunt-Activate your account'
+    subject = 'Programming Club-Activate your account'
     context = {'user': user, 'domain': current_site.domain,
                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                'token': generate_token.make_token(user)}
@@ -90,8 +90,8 @@ class RegisterView(TemplateView):
         # Email verification is done by encoding user's primary key and generating a token
         send_activation_email(request, user, email)
 
-        messages.info(
-            request, 'Verification link sent. Check your email! Please wait for 5-7 minutes and check for SPAM/Promotions Folder in Gmail!')
+        messages.info(request,
+                      'Verification link sent. Check your email! Please wait for 5-7 minutes and check for SPAM/Promotions Folder in Gmail!')
         return redirect('user_login')
 
 
@@ -146,14 +146,14 @@ class EmailActivateView(View):
             user = None
 
         if user is None:
-            messages.info(request, 'Verification failed!!')
+            messages.error(request, 'Verification failed!!')
         else:
             if generate_token.check_token(user, token):
                 user.is_activated = True
                 user.save()
                 messages.info(request, 'Link verified successfully!!')
             else:
-                messages.info(request, 'Verification failed!!')
+                messages.error(request, 'Verification failed!!')
         return redirect('user_login')
 
 
@@ -191,7 +191,8 @@ class ForgotPasswordView(View):
 
             send_mail(subject, plain_message, EMAIL_HOST_USER,
                       [user.email], html_message=message)
-            messages.info(request, 'Reset link sent, check your inbox.')
+            messages.info(request,
+                          'Verification link sent. Check your email! Please wait for 5-7 minutes and check for SPAM/Promotions Folder in Gmail!')
             return redirect('user_login')
 
 
@@ -217,7 +218,7 @@ class PasswordSetterView(View):
                 context = {'username': user.username}
                 return render(request, 'account/new_password.html', context)
             else:
-                messages.info(request, 'Link verification failed!!')
+                messages.error(request, 'Link verification failed!!')
                 return redirect('forgot_password')
 
     def post(self, request, *args, **kwargs):
@@ -232,7 +233,7 @@ class PasswordSetterView(View):
             messages.info(request, 'Password changed successfully!!')
             return redirect('user_login')
         else:
-            messages.erroe(request, 'Passwords didn\'t match. Get link again.')
+            messages.error(request, 'Passwords didn\'t match. Get link again.')
             return redirect('forgot_password')
 
 

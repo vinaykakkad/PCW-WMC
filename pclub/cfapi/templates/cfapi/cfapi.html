@@ -84,7 +84,7 @@
                     <td class="col-2">
                         {{max_wrong_tag}}   
                         {% if max_wrong_tag is not None %}
-                            <a href="{% url 'resources' %}?tags={max_wrong_tag}}">Check resources</a>
+                            <a href="{% url 'resources' %}?tags={{max_wrong_tag}}">Check resources</a>
                         {% endif %}
                     </td>
                 </tr>
@@ -112,4 +112,6 @@
     {% else %}
         <h3>Something went wrong, please try again.</h3>   
     {% endif %}
+    
+    {% include 'footer.html' %}
 {% endblock %}

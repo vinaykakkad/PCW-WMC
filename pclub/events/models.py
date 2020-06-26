@@ -13,6 +13,9 @@ class Events(models.Model):
     end_date = models.DateTimeField(null=True, blank=True)
     registration_link = models.CharField(max_length=300, default="")
 
+    def __str__(self):
+        return self.title
+    
     def get_tzinfo_current(self):
         return datetime.now(tz=self.start_date.tzinfo)
 
@@ -24,7 +27,8 @@ class Events(models.Model):
 
 
 class Images(models.Model):
-    event = models.ForeignKey(Events, on_delete=models.CASCADE, related_name="images")
+    event = models.ForeignKey(
+        Events, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(upload_to="events/images")
 
     def get_url(self):

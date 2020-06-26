@@ -6,6 +6,11 @@ body {
     min-height: 90vh;
 }
 
+#reset-email-getter,
+#new-password {
+    min-height: 90vh;
+}
+
 .auth-box {
     background-color: white;
     color: #ff0054;
@@ -36,7 +41,8 @@ body {
     width: 300px;
 }
 
-.auth-box-footer * {
+.auth-box-footer *,
+.auth-box-footer a:hover {
     font-size: 12px;
     color: white;
     text-align: center;

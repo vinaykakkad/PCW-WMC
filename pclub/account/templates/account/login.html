@@ -19,7 +19,7 @@
             <button type="submit" class="btn auth-button">Log in</button>
         </form>
     </div>
-    <div class="auth-box-footer mx-auto my-2">
+    <div class="auth-box-footer mx-auto mb-5">
         <table>
             <tr>
                 <td>New User??<a href="{% url 'register' %}">Sign up</a></td>
@@ -27,4 +27,5 @@
             </tr>
         </table>
     </div>
+    {% include 'footer.html' %}
 {% endblock %}

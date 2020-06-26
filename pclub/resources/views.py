@@ -6,6 +6,11 @@ from .models import Resources, Tags
 
 
 class ResourcesView(TemplateView):
+    """
+        Resources Page View
+
+        Renders resources page and filters data as per requirement.
+    """
 
     def get(self, request, *args, **kwargs):
         all_tags = Tags.objects.all()
@@ -55,7 +60,7 @@ class ResourcesView(TemplateView):
                     final_resources.append(resource)
 
             resources = final_resources
-            
+
         if request.session['title'] is not None:
             filtered = True
             filter_title = request.session['title']
@@ -65,5 +70,6 @@ class ResourcesView(TemplateView):
         page = request.GET.get('page')
         resources = paginator.get_page(page)
 
-        context = {'page_object': resources, 'tags': all_tags, 'filtered': filtered, 'last_page': paginator.num_pages }
+        context = {'page_object': resources, 'tags': all_tags,
+                   'filtered': filtered, 'last_page': paginator.num_pages}
         return render(request, 'resources/resources.html', context)

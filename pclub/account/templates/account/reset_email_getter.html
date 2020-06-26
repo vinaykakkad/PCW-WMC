@@ -6,13 +6,16 @@
 {% endblock %}
 
 {% block content %}
-    <div class="auth-box mx-auto p-3">
-        <div class="auth-box-header">Reset Password </div>
-        <form action="{% url 'forgot_password' %}" method="POST">
-            {% csrf_token %}
-            <label for="email">Email id:</label>
-            <input type="email" name="email" class="field form-control" placehoder="Email" required>
-            <button type="submit" class="btn auth-button mt-3">Submit</button>
-        </form>
-    </div>
+    <section id="reset-email-getter">
+        <div class="auth-box mx-auto p-3 mb-5">
+            <div class="auth-box-header">Reset Password </div>
+            <form action="{% url 'forgot_password' %}" method="POST">
+                {% csrf_token %}
+                <label for="email">Email id:</label>
+                <input type="email" name="email" class="field form-control" placehoder="Email" required>
+                <button type="submit" class="btn auth-button mt-3">Submit</button>
+            </form>
+        </div>
+    </section>
+    {% include 'footer.html' %}
 {% endblock %}

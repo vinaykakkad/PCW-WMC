@@ -19,7 +19,8 @@
             <button type="submit" class="btn auth-button">Sign up</button>
         </form>
     </div>
-    <div class="auth-box-footer mx-auto my-2">
+    <div class="auth-box-footer mx-auto mb-5">
         <p>Existing User??<a href="{% url 'user_login'%}">Log in</a></p>            
     </div>
+    {% include 'footer.html' %}
 {% endblock %}

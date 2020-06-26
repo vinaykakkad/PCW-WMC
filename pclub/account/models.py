@@ -5,6 +5,9 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Account Manger for custom user model
 class AccountManager(BaseUserManager):
+    """
+        User Manager for custom user model
+    """
 
     def create_user(self, username, email, password=None, fullname=None, cf_username=None,
                     is_active=True, is_staff=False, is_superuser=False, is_activated=False):
@@ -53,6 +56,10 @@ class AccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
+    """
+        Custom user Model
+    """
+    
     # custom fields
     username = models.CharField(unique=True, max_length=220)
     email = models.EmailField(unique=True)

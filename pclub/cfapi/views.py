@@ -9,6 +9,12 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def cfapi_view(request, *args, **kwrags):
+    """
+        Codeforces API view
+
+        Gets the data of the user using CF API and
+        prepares statistics form it.
+    """
     user = request.user.cf_username
     wrong_tag_count = dict()
     all_tag_count = dict()
@@ -45,10 +51,9 @@ def cfapi_view(request, *args, **kwrags):
 
         try:
             max_tag = max(all_tag_count, key=all_tag_count.get)
-            a = max_tag 
         except Exception as identifier:
             max_tag = None
-         
+
         try:
             max_wrong_tag = max(wrong_tag_count, key=wrong_tag_count.get)
         except Exception as identifier:
@@ -65,7 +70,7 @@ def cfapi_view(request, *args, **kwrags):
         status = None
 
     context = {'status': status, 'correct': correct, 'total': total,
-               'max_tag': max_tag, 'max_wrong_tag': max_wrong_tag, 
+               'max_tag': max_tag, 'max_wrong_tag': max_wrong_tag,
                'all_verdicts': json.dumps(all_verdicts),
                'all_tags': json.dumps(all_tag_count)}
 

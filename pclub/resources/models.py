@@ -20,6 +20,8 @@ class Files(models.Model):
     name = models.CharField(max_length=220, default="",)
     resource = models.ForeignKey(Resources, on_delete=models.CASCADE, related_name="files", null=True, blank=True)
     resource_file = models.FileField(upload_to="resouces/uploads")
+    def __str__(self):
+        return self.name
 
 class Links(models.Model):
     name = models.CharField(max_length=220, default="")

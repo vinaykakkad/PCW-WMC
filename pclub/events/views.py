@@ -10,17 +10,19 @@ from .models import Events, Images
 
 
 class EventsPageView(TemplateView):
+    """
+        Events Page View
+
+        Renders events page and filters data as per requirement.
+    """
 
     def get(self, request, *args, **kwargs):
         events = Events.objects.order_by('-start_date')
         current_time = timezone.now()
         filtered = False
-        a = b = c = 0 
 
-        x = request.GET.get('clear')
         # Clearing all the filters
         try:
-            a = 2
             if request.GET.get('clear') == '1':
                 request.session['when'] = None
                 request.session['month'] = None
@@ -42,7 +44,6 @@ class EventsPageView(TemplateView):
         try:
             if request.GET.get('title') is not None and request.GET.get('title') != "":
                 request.session['title'] = request.GET.get('title')
-                b = 1
         except Exception as identifier:
             pass
 
@@ -62,7 +63,6 @@ class EventsPageView(TemplateView):
                 pass
         except Exception as identifier:
             request.session['title'] = None
-            c = 1
 
         # Filtering data as per requirement
         if request.session['when'] is not None:
@@ -87,7 +87,6 @@ class EventsPageView(TemplateView):
 
         if request.session['title'] is not None:
             filtered = True
-            d = a
             filter_title = request.session['title']
             events = events.filter(title__icontains=filter_title)
 
