@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>PCW-Profile</title>
+    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section id='profile-body'>
+        <div class="profile-box mx-auto mb-5">
+            <h3>Profile</h3>
+            <table class="table-striped">
+                <tr>
+                    <td class="col-1">Username:</td>
+                    <td class="col-2">{{user.username}}</td>
+                </tr>
+                <tr>
+                    <td class="col-1">Fullname:</td>
+                    <td class="col-2">{{user.fullname}}</td>
+                </tr>
+                <tr>
+                    <td class="col-1">Email:</td>
+                    <td class="col-2">{{user.email}}
+                        </td>
+                </tr>
+                {% if user.cf_username|length != 0 %}
+                <tr>
+                    <td class="col-1">Codeforces id:</td>
+                    <td class="col-2">{{user.cf_username}}</td>
+                </tr>
+                {% endif %}
+                {% if user.github_username|length != 0 %}
+                <tr>
+                    <td class="col-1">Github id:</td>
+                    <td class="col-2">{{user.github_username}}</td>
+                </tr>
+                {% endif %}
+            </table>
+        </div>
+    </section>
+    <section id="profile-footer">
+        {% include 'profiles/profiles_pagination.html' %}    
+        {% include 'footer.html'%}
+    </section>
+{% endblock %}

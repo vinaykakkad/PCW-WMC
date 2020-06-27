@@ -6,9 +6,8 @@ body {
     min-height: 90vh;
 }
 
-#reset-email-getter,
-#new-password {
-    min-height: 90vh;
+#auth-body {
+    min-height: 75vh;
 }
 
 .auth-box {

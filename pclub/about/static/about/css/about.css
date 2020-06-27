@@ -4,6 +4,10 @@ body {
     background-repeat: no-repeat;
 }
 
+#about-body {
+    min-height: 50vh;
+}
+
 .heading {
     text-align: center;
     color: white;

@@ -20,7 +20,7 @@ from resources.views import ResourcesView
 from account.views import RegisterView, LoginView, EmailActivateView, ForgotPasswordView, PasswordSetterView, logout_view, ProfileView
 from events.views import EventsPageView
 from about.views import about_page_view 
-from cfapi.views import cfapi_view, github_api_view
+from profiles.views import profiles_list_view, home_profile_view, github_api_view, codeforces_api_view
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
@@ -44,9 +44,11 @@ urlpatterns = [
     path('events/', EventsPageView.as_view(), name='events'),
     # about
     path('about/', about_page_view, name='about'),
-    # cfapi
-    path('github/', github_api_view, name='github'),
-    path('cfapi/', cfapi_view, name='cfapi')
+    # profiles
+    path('profile/home', home_profile_view, name='profile_home'),
+    path('profile/cfapi/', codeforces_api_view, name='cfapi'),
+    path('profile/github/', github_api_view, name='github'),
+    path('profiles/list/', profiles_list_view, name='profiles')
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)

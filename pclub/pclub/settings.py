@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'resources',
     'about',
     'account',
-    'cfapi'
+    'profiles',
 ]
 
 MIDDLEWARE = [

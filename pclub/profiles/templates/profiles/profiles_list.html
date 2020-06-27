@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>PCW-Profiles</title>
+    <link rel="stylesheet" href="{% static 'profiles/css/profiles_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section id="profiles-list-head">
+        <div class="container-fluid pt-5">
+            <p class="center-mx profiles-heading"> 
+                Profiles<br>
+                <div class="container underline"></div>
+            </p>
+        </div>
+    </section>
+    <section id="profiles-list-body">
+        <table class="table-striped profiles-table center-mx mb-5">
+            {% for profile in page_object %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'profile_home' %}?username={{profile.username}}">{{profile.username}}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </section>
+    <section id="profiles-list-footer">
+        {% include 'pagination.html' %}
+        {% include 'footer.html' %}
+    </section>
+{% endblock %}

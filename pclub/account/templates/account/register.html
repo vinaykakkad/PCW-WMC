@@ -6,21 +6,25 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container auth-box center-mx pb-3">
-        <form action="{% url 'register' %}" method="POST">
-            {% csrf_token %}
-            <div class="container auth-box-header">
-                Register 
-            </div>
-            {% for field in form %}
-                <label for="{{field.label}}"><b>{{field.label}}</b></label>
-                {{field}}
-            {% endfor %}
-            <button type="submit" class="btn auth-button">Sign up</button>
-        </form>
-    </div>
-    <div class="auth-box-footer mx-auto mb-5">
-        <p>Existing User??<a href="{% url 'user_login'%}">Log in</a></p>            
-    </div>
-    {% include 'footer.html' %}
+    <section id="auth-body">
+        <div class="container auth-box center-mx pb-3">
+            <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                <div class="container auth-box-header">
+                    Register 
+                </div>
+                {% for field in form %}
+                    <label for="{{field.label}}"><b>{{field.label}}</b></label>
+                    {{field}}
+                {% endfor %}
+                <button type="submit" class="btn auth-button">Sign up</button>
+            </form>
+        </div>
+        <div class="auth-box-footer mx-auto mb-5">
+            <p>Existing User??<a href="{% url 'user_login'%}">Log in</a></p>            
+        </div>
+    </section>
+    <section id="auth-footer">
+        {% include 'footer.html' %}
+    </section>
 {% endblock %}

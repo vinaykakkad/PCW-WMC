@@ -94,6 +94,6 @@ class EventsPageView(TemplateView):
         page = request.GET.get('page')
         events = paginator.get_page(page)
 
-        context = {'page_object': events,
+        context = {'page_object': events, 'last_page': paginator.num_pages,
                    'filtered': filtered, 'page_name': events}
         return render(request, 'events/events.html', context)

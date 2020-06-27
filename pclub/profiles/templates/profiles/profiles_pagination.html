@@ -1,0 +1,11 @@
+<table class="pagination center-mx d-flex justify-content-center">
+    <tr>
+        <td class="page-item"><a class="page-link" href="{% url 'profile_home' %}?username={{user.username}}">Home</a></td>
+        {% if user.cf_username|length != 0 %}
+            <td class="page-item"><a class="page-link" href="{% url 'cfapi' %}?username={{user.username}}">Codeforces</a></td>
+        {% endif %}
+        {% if user.github_username|length != 0 %}    
+            <td class="page-item"><a class="page-link" href="{% url 'github' %}?username={{user.username}}">Github</a></td>
+        {% endif %}
+    </tr>
+</table>

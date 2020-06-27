@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <section id="reset-email-getter">
+    <section id="auth-body">
         <div class="auth-box mx-auto p-3 mb-5">
             <div class="auth-box-header">Reset Password </div>
             <form action="{% url 'forgot_password' %}" method="POST">
@@ -17,5 +17,7 @@
             </form>
         </div>
     </section>
-    {% include 'footer.html' %}
+    <section id="auth-footer">
+        {% include 'footer.html' %}
+    </section>
 {% endblock %}

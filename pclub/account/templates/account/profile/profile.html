@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+    <section id="profile-body">
     <div class="profile-box mx-auto mb-5">
             <h3>Profile</h3>
             <table class="table-striped">
@@ -23,17 +24,32 @@
                     <td class="col-2">{{request.user.email}}
                         </td>
                 </tr>
+                {% if request.user.cf_username|length != 0 %}
                 <tr>
                     <td class="col-1">Codeforces id:</td>
                     <td class="col-2">{{request.user.cf_username}}</td>
                 </tr>
+                {% endif %}
+                {% if request.user.github_username|length != 0 %}
+                <tr>
+                    <td class="col-1">Github id:</td>
+                    <td class="col-2">{{request.user.github_username}}</td>
+                </tr>
+                {% endif %}
             </table>
 
             <button type="button" class="btn btn-md profile-button mt-3" data-toggle="modal" data-target="#password-modal">Change Password</button><br>
-            <button type="button" class="btn btn-md profile-button my-3" data-toggle="modal" data-target="#cfid-modal">Update CF id</button>              
+            {% if request.user.cf_username|length != 0 %}
+                <button type="button" class="btn btn-md profile-button my-3" data-toggle="modal" data-target="#cfid-modal">Update CF id</button>              
+            {% endif %}
         </div>
 
         {% include 'account\profile\change_password_modal.html' %}
-        {% include 'account\profile\change_cfid_modal.html' %}
+        {% if request.user.cf_username|length != 0 %}
+            {% include 'account\profile\change_cfid_modal.html' %}
+        {% endif %}
+    </section>
+    <section id="profile-footer">
         {% include 'footer.html'%}
+    </section>
 {% endblock %}

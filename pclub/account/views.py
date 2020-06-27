@@ -60,16 +60,9 @@ class RegisterView(TemplateView):
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
 
-        if cf_username == "":
-            cf_username = None
-
         try:
-            if cf_username is None:
-                user = Account.objects.get(
-                    Q(username=username) | Q(email=email))
-            else:
-                user = Account.objects.get(Q(username=username) | Q(
-                    email=email) | Q(cf_username=cf_username))
+            user = Account.objects.get(
+                Q(username=username) | Q(email=email))
         except Exception as identifier:
             user = None
 
@@ -290,19 +283,9 @@ class ProfileView(LoginRequiredMixin, View):
             if user is None:
                 messages.error(request, 'Password couldn\'t be verified')
             else:
-                cf_username = request.POST.get('cf_username')
-
-                try:
-                    user = Account.objects.get(cf_username=cf_username)
-                except Exception as identifier:
-                    user = None
-
-                if user is None:
-                    request.user.cf_username = cf_username
-                    request.user.save()
-                    messages.info(request, 'Username updated successfully')
-                else:
-                    messages.error(request, 'Username is already in use')
+                request.user.cf_username = request.POST.get('cf_username')
+                request.user.save()
+                messages.info(request, 'Username updated successfully')
 
             return redirect('profile')
 

@@ -1,28 +1,49 @@
-import requests
 import json
+import requests
 
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
+from account.models import Account
 # Create your views here.
 
 
-@login_required
-def cfapi_view(request, *args, **kwrags):
+def profiles_list_view(request, *args, **kwargs):
+    accounts = Account.objects.filter(is_superuser=False).order_by('pk')
+
+    paginator = Paginator(accounts, 10)
+    page = request.GET.get('page')
+    accounts = paginator.get_page(page)
+
+    context = {'page_object': accounts, 'last_page': paginator.num_pages}
+    return render(request, 'profiles/profiles_list.html', context)
+
+
+def home_profile_view(request, *args, **kwargs):
+    username = request.GET.get('username')
+    user = Account.objects.get(username=username)
+    
+    context = {'user': user}
+    return render(request, 'profiles/home_profile.html', context)    
+
+
+def codeforces_api_view(request, *args, **kwargs):
     """
         Codeforces API view
 
         Gets the data of the user using CF API and
         prepares statistics form it.
     """
-    user = request.user.cf_username
+    username = request.GET.get('username')
+    user = Account.objects.get(username=username)
+    cf_username = user.cf_username
     wrong_tag_count = dict()
     all_tag_count = dict()
     all_verdicts = dict()
     total = 0
     max_tag = max_wrong_tag = None
     response = requests.get('https://codeforces.com/api/user.status',
-                            params={'handle': user, 'from': 1, 'count': 1000})
+                            params={'handle': cf_username, 'from': 1, 'count': 1000})
 
     response = response.json()
     if response['status'] == 'OK':
@@ -72,13 +93,13 @@ def cfapi_view(request, *args, **kwrags):
     context = {'status': status, 'correct': correct, 'total': total,
                'max_tag': max_tag, 'max_wrong_tag': max_wrong_tag,
                'all_verdicts': json.dumps(all_verdicts),
-               'all_tags': json.dumps(all_tag_count)}
+               'all_tags': json.dumps(all_tag_count), 'user': user}
 
-    return render(request, 'cfapi/cfapi.html', context)
+    return render(request, 'profiles/cfapi.html', context)
 
 
-@login_required
-def github_api_view(request, *args, **kwrags):
+
+def github_api_view(request, *args, **kwargs):
     """
         Github API view
 
@@ -86,15 +107,16 @@ def github_api_view(request, *args, **kwrags):
         and prepares statistics form it.
     """
 
-    user = request.user.github_username
+    username = request.GET.get('username')
+    user = Account.objects.get(username=username)
+    github_username = user.github_username
     all_languages = dict()
     max_language = None
     status = False
     repos = 0
 
-    a = 'https://api.github.com/users/' + user + '/repos'
 
-    response = requests.get('https://api.github.com/users/' + user + '/repos')
+    response = requests.get('https://api.github.com/users/' + github_username + '/repos')
     response = response.json()
 
     try:
@@ -121,6 +143,6 @@ def github_api_view(request, *args, **kwrags):
             max_language = None
 
     context = {'status': status, 'repos': repos, 'max_language': max_language,
-               'all_languages': json.dumps(all_languages)}
+               'all_languages': json.dumps(all_languages), 'user': user}
         
-    return render(request, 'cfapi/githubapi.html', context)
+    return render(request, 'profiles/githubapi.html', context)
