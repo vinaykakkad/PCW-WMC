@@ -8,7 +8,7 @@ Programming club website for displaying club's information, event details and fo
 - Django
 - Javascript
 - Charts.js
-- Codeforces API
+- Codeforces APIs
 - Github users API
 
 ## Features
